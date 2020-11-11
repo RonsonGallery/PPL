@@ -33,6 +33,8 @@ def myFilterMulti(L, funcL):
 def is_anagram(a,b):
     a = ''.join(sorted(a.lower()))
     b = ''.join(sorted(b.lower()))
+    a = a.replace(" ", "")
+    b = b.replace(" ", "")
     return a == b
 
 
@@ -44,3 +46,4 @@ print(myFilter(L, myPrime))
 print(myFilterMulti([1,9,10,16,24,55,131,149,181],[myPrime, isPalindrome]))
 print(is_anagram("School master", "The classroom"))
 print(is_anagram("Elior", "roli"))
+print(is_anagram("Elior", " Liore "))
