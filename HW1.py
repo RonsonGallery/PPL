@@ -1,7 +1,5 @@
 import math
 import string
-import re
-
 
 def XNOR(x, y):
     return (x == y)
@@ -14,9 +12,9 @@ print(XNOR(False, False))
 print(XNOR(False, True))
 
 
-def RemoveMinDigit(x):
-    min = 9
-    num = 0
+def RemoveMinDigit(x):                          #x is a number (Assumption is that x is a number)
+    min = 9                                     #Min starts as the biggest number possible 9 so the comparrisons work correctly
+    num = 0                                     #num contains the new number without the minimum digit
     for i in (str(x)):
         if int(i) < int(min) and int(i) != 0:
             min = i
@@ -36,16 +34,17 @@ print(RemoveMinDigit(1234567))
 
 
 def SquareArea(a, b, c, d, alpha, beta):
-    s = int((a + b + c + d)) / 2
-    return math.sqrt((s - a) * (s - b) * (s - c) * (s - d) - 0.5 * (a * b * c * d) * (1 + math.cos(alpha + beta)))
+    s = (a + b + c + d) / 2             #a,b,c,d are the sides of the shape s is half of the perimeter
+    return math.sqrt((s - a) * (s - b) * (s - c) * (s - d) - 0.5 * (a * b * c * d)* abs((1 + math.cos(math.radians(alpha + beta)))))
+
 print("Test for SquareArea")
 print("Enter a,b,c,d,alpha,beta in that exact order:")
 print("", SquareArea(float(input()), float(input()), float(input()), float(input()), float(input()), float(input())))
 
 
 def CheckArithmeticSeries(x):
-    An = x % 10
-    An1 = x // 10
+    An = x % 10                 #An and An1 used to calculate the d which is the jump between every number
+    An1 = x // 10               #Last anc current hold the current and previous value respectfully
     An1 = An1 % 10
     d = An - An1
     current = 0
@@ -68,7 +67,7 @@ print(CheckArithmeticSeries(14789))
 print(CheckArithmeticSeries(1234567))
 
 
-def CanBeTriangle(a, b, c):
+def CanBeTriangle(a, b, c):                                                     #a b and c are the sides of the triangle and are taken as floats
     if (a < 0 or b < 0 or c < 0 or a > (b + c) or b > (a + c) or c > (b + c)):
         return False
     return True
