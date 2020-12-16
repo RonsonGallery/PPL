@@ -5,6 +5,7 @@ stop_list = ('is', 'it', 'are', 'our', 'my', 'the', 'they', 'and')
 
 stem_rules = ('less', 'ship', 'ing', 'es', 'ly', 's')
 
+
 def getBigrams(text):
     # map(bi_grams_calculating,map(stemming,map(numbers_removal,map(stopWords_removal,map(tokenization,text)))))
     text = tokenization(text)
@@ -32,6 +33,7 @@ def tokenization(text):
 
     # text = map(lambda x: x.lower(), text.split())
     return text
+
 
 def equal(x):
     for i in stop_list:
@@ -88,7 +90,8 @@ class Triangle():
         return self.perimeter() + other.perimeter()
 
     def __repr__(self):
-        return repr('Triangle with sides equal ' + str(self.side_a) + ', ' + str(self.side_b) + ', and ' + str(self.side_c))
+        return repr(
+            'Triangle with sides equal ' + str(self.side_a) + ', ' + str(self.side_b) + ', and ' + str(self.side_c))
 
     def perimeter(self):
         return int(self.side_a + self.side_b + self.side_c)
@@ -108,14 +111,32 @@ class Square():
 def add(s, t):
     return s.perimeter() + t.perimeter()
 
+
 class Node:
-    def __init__(self,value):
+    def __init__(self, value):
         self.value = value
         self.point = None
+
+    def __str__(self):
+        return str(self.value)
+
 
 class LinkedList:
     def __init__(self):
         self.head = None
+
+    def __str__(self):
+        res = ''
+        ptr = self.head
+        while ptr:
+            res += str(ptr.value) + ", "
+            ptr = ptr.point
+        res = res.strip(", ")
+
+        if len(res):
+            return "[" + res + "]"
+        else:
+            return "[]"
 
     def __len__(self):
         i = 0
@@ -125,15 +146,20 @@ class LinkedList:
             i += 1
         return i
 
-    def insert(self,value):
+    def insert(self, value):
         head = self.head
         tempNode = Node(value)
+
+        if head is None:
+            self.head = tempNode
+            del tempNode
+            return head
         while head.point:
             head = head.point
         head.point = tempNode
         del tempNode
 
-    def insert(self,i,value):
+    def insert_i(self, i, value):
         head = self.head
         helpNode = None
         tempNode = Node(value)
@@ -143,21 +169,56 @@ class LinkedList:
         tempNode.point = head
         helpNode.point = tempNode
 
+    def reverse(self):
+        prev = None
+        current = self.head
+        while current is not None:
+            point = current.point
+            current.point = prev
+            prev = current
+            current = point
+        self.head = prev
 
-"""
-    def dispatch(msg):
-        if msg == 'tokenization':
-            return tokenization
-        if msg == 'numbers_removal':
-            return numbers_removal
-        elif msg == 'stopWords_removal':
-            return stopWords_removal
-        elif msg == 'stemming':
-            return stemming()
-        elif msg == 'bi_grams_calculating':
-            return bi_grams_calculating()
-        return dispatch
-"""
+    def Remove(self, key):
+        temp = self.head
+        if temp is not None:
+            if temp.value == key:
+                self.head = temp.point
+                temp = None
+                return
+        while temp is not None:
+            if temp.value == key:
+                break
+            prev = temp
+            temp = temp.point
+
+        if temp == None:
+            return
+        prev.point = temp.point
+        temp = None
+
+    def Remove_i(self, n):
+        first = self.head
+        second = self.head
+        if n == 0:
+            self.head = self.head.point
+            return
+        for i in range(n):
+            second = first
+            first = first.point
+        if first.point is None:
+            second.point = None
+            return
+        second.point = second.point.point
+
+    def Search(self, i):
+        index = self.head
+        while index.point is not None:
+            if index.value == i:
+                return index
+            index = index.point
+        return 'No value exists'
+
 
 text = 'My 100 friends are very friendly They are keeping our friendship '
 # print(text.split.stem())
@@ -178,3 +239,12 @@ List.insert(1)
 List.insert(5)
 List.insert(3)
 List.insert(8)
+List.insert_i(2, 10)
+print(List)
+List.reverse()
+print(List)
+List.Remove(10)
+List.Remove_i(1)
+Copy = List.Search(5)
+print(List)
+print(Copy)
