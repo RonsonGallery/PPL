@@ -2,7 +2,7 @@ import math
 import string
 
 def XNOR(x, y):
-    return (x == y)
+    return x == y
 
 
 print("XNOR test")
