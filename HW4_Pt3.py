@@ -3,9 +3,10 @@ class Euro():
         self.amount = amount
 
     def __str__(self):
-        return "This is a euro currency"
+        return str(self.amount)
 
-    # def __repr__(self):
+    def __repr__(self):
+        return repr('Euro ' + self.amount)
 
 
 class Dollar():
@@ -13,7 +14,10 @@ class Dollar():
         self.amount = amount
 
     def __str__(self):
-        return "This is a Dollar currency"
+        return str(self.amount)
+
+    def __repr__(self):
+        return repr('Dollar ' + self.amount)
 
 
 class Sekel():
@@ -21,7 +25,10 @@ class Sekel():
         self.amount = amount
 
     def __str__(self):
-        return "This is a sekel currency"
+        return str(self.amount)
+
+    def __repr__(self):
+        return repr('Dollar ' + self.amount)
 
 #for ease of use will convert differnt types to sekel
 
